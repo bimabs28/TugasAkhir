@@ -33,16 +33,24 @@ public class Skoring extends AppCompatActivity {
         });
     }
 
+    //method untuk mengatur skor yang akan ditampilkan pada textview
     private void setSkor() {
+        //hasil lemparan (putExtra) dari activity sebelumnya ditampung dalam variabel lokal
         String activity = getIntent().getStringExtra("activity");
         String skorPilGan = getIntent().getStringExtra("skorAkhir");
 
         if(activity.equals("PilihanGanda")) {
+            //jika var activity bernilai PilihanGanda
+            //dipastikan activity sebelumnya datang dari kelas PilihanGanda
+            //maka skornya diatur dari skorPilGan
             mtvHasilAkhir.setText("SKOR : " + skorPilGan);
         }
     }
 
     public void onBackPressed(){
         Toast.makeText(this, "Tidak bisa kembali, silahkan tekan menu", Toast.LENGTH_SHORT).show();
+        //jadi yang awalnya klik tombol back maka akan kembali ke activity sebelumnya
+        //kali ini ketika tombol back diklik maka
+        //hanya muncul Toast
     }
 }
