@@ -22,6 +22,7 @@ public class PilihanGanda extends AppCompatActivity {
      * RadioButton untuk menulis Pilihan Ganda
      * Button Submit untuk mensubmit jawaban
      */
+
     TextView mtvSkor, mtvSoal;
     RadioGroup mrgPilihanJawaban;
     RadioButton mrbPilihanJawaban1, mrbPilihanJawaban2, mrbPilihanJawaban3;
