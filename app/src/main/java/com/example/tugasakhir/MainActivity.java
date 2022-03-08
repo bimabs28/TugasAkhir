@@ -10,26 +10,43 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button mbtnStart; //menghubungkan button start dengan mainactivity
+    /**
+     * menghubungkan button start dengan mainactivity
+     */
+    Button mbtnStart;
 
+    /**
+     * @description method onCreate biasanya untuk menginisialisasi aktivitas
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //menyambungkan variabel pada MainActivity.java dengan id pada activity_main
+
+        /**
+         * menyambungkan variabel pada MainActivity.java dengan id pada activity_main
+         */
         mbtnStart = (Button) findViewById(R.id.btnStart);
 
-        //memberi aksi ketika di klik
+
+        /**
+         * memberi aksi ketika di klik
+         */
         mbtnStart.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * hasil aksinya ditulis disini (dalam method onClick)
+             */
             @Override
             public void onClick(View v) {
-                //hasil aksinya ditulis disini (dalam method onClick)
-
-                //membuat objek baru dari kelas intent,
-                //dari MainActivity akan pindah ke kelas PilihanGanda
+                /**
+                 * membuat objek baru dari kelas intent,
+                 * dari MainActivity akan pindah ke kelas PilihanGanda
+                 */
                 Intent i = new Intent (MainActivity.this, PilihanGanda.class);
-                startActivity(i); //jalankan intent
+                startActivity(i);
             }
         });
     }

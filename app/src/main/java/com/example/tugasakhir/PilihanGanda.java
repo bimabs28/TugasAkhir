@@ -11,26 +11,48 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * main class PilihanGanda
+ */
 public class PilihanGanda extends AppCompatActivity {
-    //membuat variabel baru
+    /**
+     * membuat variabel baru
+     * menampilkan text pada Skor dan Soal
+     * RadioGroup untuk memilih jawaban
+     * RadioButton untuk menulis Pilihan Ganda
+     * Button Submit untuk mensubmit jawaban
+     */
     TextView mtvSkor, mtvSoal;
     RadioGroup mrgPilihanJawaban;
     RadioButton mrbPilihanJawaban1, mrbPilihanJawaban2, mrbPilihanJawaban3;
     Button mbtnSubmit;
     int skor = 0;
-    int arr; //untuk menampung nilai panjang array
-    int x; //menunjukkan konten sekarang
-    String jawaban; //menampung jawaban benar
+    /**
+     * int arr untuk menampunf nilai panjang array
+     * int x menunjukkan konten sekarang
+     * String jawaban untuk menampung jawaban benar
+     */
+    int arr;
+    int x;
+    String jawaban;
 
-    //membuat objek dari kelas SoalPG.java
+    /**
+     * membuat objek dari kelas SoalPG.java
+     */
     SoalPG soalPG = new SoalPG();
 
+    /**
+     * @description method onCreate biasanya untuk menginisialisasi aktivitas
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pilihan_ganda);
 
-        //menyambungkan antara variabel PilihanGanda.java dengan id activity_pilihan_ganda
+        /**
+         * menyambungkan antara variabel PilihanGanda.java dengan id activity_pilihan_ganda
+         */
         mtvSkor = (TextView) findViewById(R.id.tvSkor);
         mtvSoal = (TextView) findViewById(R.id.tvSoal);
         mrgPilihanJawaban = (RadioGroup) findViewById(R.id.rgPilihanJawaban);
@@ -39,11 +61,15 @@ public class PilihanGanda extends AppCompatActivity {
         mrbPilihanJawaban3 = (RadioButton) findViewById(R.id.rbPilihanJawaban3);
         mbtnSubmit = (Button) findViewById(R.id.btnSubmit);
 
-        //set konten
+        /**
+         * untuk set konten
+         */
         mtvSkor.setText(""+skor);
         setKonten();
 
-        //menentukan aksi ketika button submit diklik
+        /**
+         * menentukan aksi ketika button submit diklik
+         */
         mbtnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,22 +82,33 @@ public class PilihanGanda extends AppCompatActivity {
         });
     }
 
-    //method untuk mengambil dan update konten dari SoalPG.java
-    //kemudian disetting atau ditempatkan pada tempat yang telah disediakan
+    /**
+     * method untuk mengambil dan update konten dari SoalPG.java
+     * kemudian disetting atau ditempatkan pada tempat yang telah disediakan
+     */
     private void setKonten() {
         mrgPilihanJawaban.clearCheck();
         arr = soalPG.pertanyaan.length;
-        if (x >= arr) { //jika nilai x melebihi nilai arr(panjang array) maka akan pindah activity (kuis selesai)
-            String jumlahSkor = String.valueOf(skor);   //menjadikan skor menjadi string
+        /**
+        *jika nilai x melebihi nilai arr(panjang array) maka akan pindah activity (kuis selesai)
+        */
+        if (x >= arr) { 
+            /**
+             *menjadikan skor menjadi string
+             */
+            String jumlahSkor = String.valueOf(skor);   
             Intent i = new Intent(PilihanGanda.this, Skoring.class);
 
-            //waktu pindah activity, sekalian membawa nilai jumlahSkor yang ditampung dengan inisial skorAkhir
-            //singkatnya skorAkhir = jumlahSkor
+            /**
+             *waktu pindah activity, sekalian membawa nilai jumlahSkor yang ditampung dengan inisial skorAkhir, singkatnya skorAkhir = jumlahSkor
+             */
             i.putExtra("skorAkhir", jumlahSkor);
             i.putExtra("activity", "PilihanGanda");
             startActivity(i);
         } else {
-            //setting text dengan mengambil text dari method getter di kelas SoalPG
+            /**
+             *setting text dengan mengambil text dari method getter di kelas SoalPG
+             */
             mtvSoal.setText(soalPG.getPertanyaan(x));
             mrbPilihanJawaban1.setText(soalPG.getPilihanJawaban1(x));
             mrbPilihanJawaban2.setText(soalPG.getPilihanJawaban2(x));
@@ -83,36 +120,69 @@ public class PilihanGanda extends AppCompatActivity {
     }
 
     public void cekJawaban() {
-        if (mrbPilihanJawaban1.isChecked()) {//jika radio button 1 diklik
-            //jika text yang tertulis di radio button tsb = nilai dari var jawaban
+        /**
+         *jika radio button 1 diklik
+         */
+        if (mrbPilihanJawaban1.isChecked()) {
+            /**
+             *jika text yang tertulis di radio button tsb = nilai dari var jawaban
+             */
             if (mrbPilihanJawaban1.getText().toString().equals(jawaban)) {
                 skor = skor + 10;
-                mtvSkor.setText("" + skor); //mtvSkor diset nilainya = var skor
-                Toast.makeText(this, "Jawaban Benar", Toast.LENGTH_SHORT).show();   //keluar notifikasi "Jawaban Benar"
-                setKonten();     //update next konten
+                /**
+                 *mtvSkor diset nilainya = var skor
+                 */
+                mtvSkor.setText("" + skor); 
+                /**
+                 *keluar notifikasi "Jawaban Benar"
+                 */
+                Toast.makeText(this, "Jawaban Benar", Toast.LENGTH_SHORT).show();  
+                /**
+                 *update next konten
+                 */ 
+                setKonten();     
             } else {
                 mtvSkor.setText("" + skor);
                 Toast.makeText(this, "Jawaban Salah", Toast.LENGTH_SHORT).show();
                 setKonten();
             }
         } else if (mrbPilihanJawaban2.isChecked()) {
-            //jika text yang tertulis di radio button tsb = nilai dari var jawaban
+            /**
+             *jika text yang tertulis di radio button tsb = nilai dari var jawaban
+             */
             if (mrbPilihanJawaban2.getText().toString().equals(jawaban)) {
                 skor = skor + 10;
-                mtvSkor.setText("" + skor); //mtvSkor diset nilainya = var skor
-                Toast.makeText(this, "Jawaban Benar", Toast.LENGTH_SHORT).show();   //keluar notifikasi "Jawaban Benar"
-                setKonten(); //update next konten
+                /**
+                 *mtvSkor diset nilainya = var skor
+                 */
+                mtvSkor.setText("" + skor); 
+                /**
+                 *keluar notifikasi "Jawaban Benar"
+                 */
+                Toast.makeText(this, "Jawaban Benar", Toast.LENGTH_SHORT).show();   
+                /**
+                 *update next konten
+                 */
+                setKonten(); 
             } else {
                 mtvSkor.setText("" + skor);
                 Toast.makeText(this, "Jawaban Salah", Toast.LENGTH_SHORT).show();
                 setKonten();
             }
         }else if(mrbPilihanJawaban3.isChecked()){
-            //jika text yang tertulis di radio button tsb = nilai dari var jawaban
+            /**
+             *jika text yang tertulis di radio button tsb = nilai dari var jawaban
+             */
             if(mrbPilihanJawaban3.getText().toString().equals(jawaban)){
                 skor = skor + 10;
-                mtvSkor.setText(""+skor);   //mtvSkor diset nilainya = var skor
-                Toast.makeText(this, "Jawaban Benar", Toast.LENGTH_SHORT).show();   //keluar notifikasi "Jawaban Benar"
+                /**
+                 *mtvSkor diset nilainya = var skor
+                 */
+                mtvSkor.setText(""+skor);   
+                /**
+                 *keluar notifikasi "Jawaban Benar"
+                 */
+                Toast.makeText(this, "Jawaban Benar", Toast.LENGTH_SHORT).show();   
                 setKonten();    //update next konten
             }else{
                 mtvSkor.setText(""+skor);
@@ -120,7 +190,10 @@ public class PilihanGanda extends AppCompatActivity {
                 setKonten();
             }
         }else{
-            Toast.makeText(this, "Silahkan pilih jawaban dulu!", Toast.LENGTH_SHORT).show();    //ini jika belum memilih jawaban tapi sudah di klik next maka muncul notif "Silahkan pilih jawaban dulu!"
+            /**
+             *ini jika belum memilih jawaban tapi sudah di klik next maka muncul notif "Silahkan pilih jawaban dulu!"
+             */
+            Toast.makeText(this, "Silahkan pilih jawaban dulu!", Toast.LENGTH_SHORT).show();    
         }
     }
 

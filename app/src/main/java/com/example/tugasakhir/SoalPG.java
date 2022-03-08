@@ -2,7 +2,9 @@ package com.example.tugasakhir;
 
 public class SoalPG {
 
-    //membuat array untuk pertanyaan
+    /**
+    *membuat array untuk pertanyaan
+    */
     public  String pertanyaan[] = {
             "Siapakah Kaprodi dari TI UMY?",
             "Di gedung manakah prodi Teknologi Informasi berada?",
@@ -18,7 +20,9 @@ public class SoalPG {
 
     private  String pilihanJawaban [][] = {
 
-            //membuat array untuk pilihan jawaban
+            /**
+            *membuat array untuk pilihan jawaban
+            */
             {"Pak Giga ", "Pak Asep Setiawan ", "Bapak Asroni"},
             {"Gedung E7", "Gedung F4", "Gedung G5"},
             {"LAN", "WAN", "PAN"},
@@ -35,7 +39,9 @@ public class SoalPG {
 
     private String jawabanBenar [] = {
 
-            //membuat array untuk jawaban benar
+            /**
+            *membuat array untuk jawaban benar
+            */
             "Bapak Asroni",
             "Gedung F4",
             "LAN",
@@ -51,34 +57,44 @@ public class SoalPG {
 
     public String getPertanyaan(int x){
 
-        //membuat getter untuk mengambil pertanyaan
+        /**
+        *membuat getter untuk mengambil pertanyaan
+        */
         String soal = pertanyaan[x];
         return soal;
     }
 
     public String getPilihanJawaban1(int x) {
 
-        //membuat getter untuk mengambil pilihan jawaban 1
+        /**
+        *membuat getter untuk mengambil pilihan jawaban 1
+        */
         String jawaban1 = pilihanJawaban[x][0];
         return jawaban1;
     }
     public String getPilihanJawaban2(int x){
 
-        //membuat getter untuk mengambil pilihan jawaban 2
+        /**
+        *membuat getter untuk mengambil pilihan jawaban 2
+        */
         String jawaban2 = pilihanJawaban[x][1];
         return jawaban2;
     }
 
     public String getPilihanJawaban3(int x){
 
-        //membuat getter untuk mengambil pilihan jawaban 3
+        /**
+        *membuat getter untuk mengambil pilihan jawaban 3
+        */
         String jawaban3 = pilihanJawaban[x][2];
         return jawaban3;
     }
 
     public String getJawabanBenar(int x){
 
-        //membuat getter untuk mengambil jawaban benar
+        /**
+        *membuat getter untuk mengambil jawaban benar
+        */
         String jawaban = jawabanBenar[x];
         return jawaban;
     }
